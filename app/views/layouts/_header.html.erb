@@ -1,0 +1,19 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to image_tag("activities.jpeg", width: 140), root_path, id: "logo" %>
+      <nav>
+        <ul class="nav nav-pills pull-right">
+          <li><%= link_to "Activities", "#" %></li>
+          <li>
+              <%= form_tag "#", :class=>'form-search', method: :post do %>
+                <%= text_field_tag :search_box, '', class: "input-medium search-query", placeholder: "Search" %>
+              <% end %>
+          </li>
+          <li><%= link_to "Register", "#" %></li>
+          <li class="active"><%= link_to "Sign In", "#" %></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>

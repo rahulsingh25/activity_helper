@@ -1,4 +1,9 @@
 ActivityHelper::Application.routes.draw do
+  devise_for :users do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
+  # get "home_page/home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +53,7 @@ ActivityHelper::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+   root :to => 'home_page#home'
 
   # See how all your routes lay out with "rake routes"
 
