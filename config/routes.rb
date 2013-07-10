@@ -1,8 +1,11 @@
-ActivityHelper::Application.routes.draw do
-  devise_for :users do
-    get '/users/sign_out' => 'devise/sessions#destroy'
-  end
-  # get "home_page/home"
+ActivityHelper::Application.routes.draw do 
+
+  
+  devise_for :users, controllers: {registrations: "users/registrations"}
+
+  resources :users
+
+    # get "home_page/home"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

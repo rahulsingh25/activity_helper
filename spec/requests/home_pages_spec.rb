@@ -15,4 +15,6 @@ subject{ page }
 	 	 it { should have_selector("input") }
 	 	 
 	end
+
+	
 end

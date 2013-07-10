@@ -8,8 +8,9 @@ gem 'rails'
 gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
-gem 'devise'
+gem 'devise', '3.0.0.rc'
 gem 'protected_attributes'
+gem 'annotate'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -30,6 +31,7 @@ end
 
 group :test do
 	gem 'capybara'
+	gem 'factory_girl_rails'
 end
 
 group :production do

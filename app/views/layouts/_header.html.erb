@@ -10,8 +10,12 @@
                 <%= text_field_tag :search_box, '', class: "input-medium search-query", placeholder: "Search" %>
               <% end %>
           </li>
-          <li><%= link_to "Register", "#" %></li>
-          <li class="active"><%= link_to "Sign In", "#" %></li>
+          <% if !current_user %>
+            <li><%= link_to "Register", "#" %></li>
+            <li class="active"><%= link_to "Sign In", user_session_path %></li>
+          <% else %>
+            <li><%= link_to "Logout", user_path("sign_out"), :method => :delete %></li>
+          <% end %>
         </ul>
       </nav>
     </div>
