@@ -31,6 +31,7 @@ describe User do
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:name) }
+  it { should respond_to(:confirmation_token) }
   
   it { should be_valid }
 
@@ -100,7 +101,12 @@ describe User do
     it { should_not be_valid }
   end 
 
-   
+  describe "remember token" do
+    before{ @user.save }
+    its(:confirmation_token){ should_not be_blank }
+    its(:confirmed_at){ should be_blank }
+    its(:confirmation_sent_at){ should_not be_blank }
+  end
 
 end
 
