@@ -15,6 +15,11 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  name                   :string(255)
+#  unconfirmed_email      :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 
 class User < ActiveRecord::Base
@@ -26,4 +31,6 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :password, :name
   validates :name, presence: true, length: {maximum:30}
+
+  has_many :activities, dependent: :destroy
 end

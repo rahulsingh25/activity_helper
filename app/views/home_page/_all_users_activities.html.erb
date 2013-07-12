@@ -1,0 +1,9 @@
+
+    <% if @activities.any? %>
+      <%= will_paginate @activities %>
+      <ol class="activities">
+        <%= render @activities %>
+      </ol>
+      <%= will_paginate @activities %>
+    <% end %>
+  

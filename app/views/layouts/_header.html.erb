@@ -15,6 +15,7 @@
             <li class="active"><%= link_to "Sign In", user_session_path %></li>
           <% else %>
             <li><%= link_to "Logout", user_path("sign_out"), :method => :delete %></li>
+            <li><%= link_to "Profile", user_path(current_user) %>
           <% end %>
         </ul>
       </nav>

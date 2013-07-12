@@ -3,8 +3,11 @@ ActivityHelper::Application.routes.draw do
   
   devise_for :users, controllers: {registrations: "users/registrations"}
 
-  resources :users
+  resources :users do
 
+     resources :activities, only: [:new, :create, :destroy]  
+
+  end
     # get "home_page/home"
 
   # The priority is based upon order of creation:

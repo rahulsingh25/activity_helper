@@ -15,6 +15,11 @@
 #  last_sign_in_ip        :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  name                   :string(255)
+#  unconfirmed_email      :string(255)
+#  confirmation_token     :string(255)
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
 #
 
 require 'spec_helper'
@@ -32,6 +37,7 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:name) }
   it { should respond_to(:confirmation_token) }
+  it { should respond_to(:activities) }
   
   it { should be_valid }
 
@@ -106,6 +112,30 @@ describe User do
     its(:confirmation_token){ should_not be_blank }
     its(:confirmed_at){ should be_blank }
     its(:confirmation_sent_at){ should_not be_blank }
+  end
+
+  describe "activity associations" do
+
+    before { @user.save }
+    let!(:older_activity) do 
+      FactoryGirl.create(:activity, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_activity) do
+      FactoryGirl.create(:activity, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right activities in the right order" do
+      @user.activities.should == [newer_activity, older_activity]
+    end
+
+    it "should destroy associated activities" do
+      activities = @user.activities.to_a
+      @user.destroy
+      expect(activities).not_to be_empty
+      activities.each do |activity|
+        expect(Activity.where(id: activity.id)).to be_empty
+      end
+    end
   end
 
 end

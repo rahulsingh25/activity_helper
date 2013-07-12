@@ -1,0 +1,26 @@
+<div class="hero-unit">
+<%= render 'shared/error_messages' %>
+    <div class="new-activity-form">
+	     <%= form_for([current_user,@activity]) do |f| %>
+  		  
+ 	 	    <div class="custom-select">
+          <%= f.label :category %>
+          <%= f.select :category,[['Please select an option', nil], 'Sports', 'Movie','Music','TV Show','Tour','Lunch','Dinner'] %>
+        </div>
+      
+          <div class="custom-input">
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+          </div>
+      
+          <div class="custom-textarea">
+            <%= f.label :description %>
+  	        <%= f.text_area :description, rows: 1 %>
+    
+            <%= f.submit "Post", class: "btn btn-custom" %>		
+          </div>
+	     <% end %>
+    </div>
+      <hr/>
+      
+</div>

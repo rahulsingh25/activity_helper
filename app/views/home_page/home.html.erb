@@ -1,7 +1,13 @@
-<% provide(:title, 'ActivityHelper') %>
-<div class="center hero-unit">
-	<h1>Welcome To The Activities Helper</h1>
+<% if current_user %>
+	<% provide(:title, current_user.name) %>
 	
-
-	<%= link_to "Sign Up Now!",new_user_registration_path, class: "btn bnt-large btn-primary" %>
-</div>
+	<%= render partial: 'activities/new' %>
+	<%= render 'home_page/all_users_activities' %>
+	
+<% else %>
+	<% provide(:title, 'ActivityHelper') %>
+	<div class="center hero-unit">
+		<h1>Welcome To The Activities Helper</h1>
+		<%= link_to "Sign Up Now!",new_user_registration_path, class: "btn btn-large btn-primary" %>
+	</div>
+<% end %>

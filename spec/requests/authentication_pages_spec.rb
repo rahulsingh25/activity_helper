@@ -35,6 +35,7 @@ describe "Authentication" do
       it { should have_title(user.name) }
       it { should have_link('Activities',    href: "#") }
       it { should have_link('Logout', href: destroy_user_session_path) }
+      it { should have_link('Profile', href: user_path(user)) }
       it { should_not have_link('Sign In', href: user_session_path) }
 
       describe "followed by signout" do
@@ -44,7 +45,23 @@ describe "Authentication" do
     end
   end
 
-  # describe "authorization" do
+  describe "authorization" do
+
+    describe "for non signed users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "in activities controller" do
+        describe "submitting to the create action" do
+          before { post activities_path }
+          specify { expect(response).to redirect_to(user_session_path) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete activity_path(FactoryGirl.create(:activity)) }
+          specify { expect(response).to redirect_to(user_session_path) }
+        end
+      end
+    end
 
     # describe "as non-admin user" do
     #   let(:user) { FactoryGirl.create(:user) }
@@ -124,5 +141,5 @@ describe "Authentication" do
   #       before { put user_path(wrong_user) }
   #       specify { response.should redirect_to(root_path) }
   #     end
-  #   end
+     end
    end

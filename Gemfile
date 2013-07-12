@@ -11,6 +11,9 @@ gem 'jquery-rails'
 gem 'devise', '3.0.0.rc'
 gem 'protected_attributes'
 gem 'annotate'
+gem 'faker'
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
