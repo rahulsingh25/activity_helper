@@ -27,7 +27,7 @@ require 'spec_helper'
 describe User do
 
   before do
-    @user = User.new(name: "Rahul Singh", email: "user@example.com", password: "foobar12", password_confirmation: "foobar12")
+    @user = User.new(username:"rahulsingh", name: "Rahul Singh", email: "user@example.com", password: "foobar12", password_confirmation: "foobar12")
   end
 
   subject { @user }
@@ -38,13 +38,19 @@ describe User do
   it { should respond_to(:name) }
   it { should respond_to(:confirmation_token) }
   it { should respond_to(:activities) }
+  it { should respond_to(:username) }
   
   it { should be_valid }
 
   describe "when name is not present" do
     before { @user.name = " " }
-    it { should_not be_valid }
+    it { should be_valid }
   end  
+
+  describe "when username is not present" do
+    before { @user.username=" " }
+    it { should_not be_valid }
+  end
 
   describe "when name is too long" do
     before { @user.name = "a" * 31 }
@@ -138,5 +144,34 @@ describe User do
     end
   end
 
+  describe "when username format is invalid" do
+    it "should be invalid" do
+      usernames = %w[user@foo,com user_at_foo_ _example.user@foo.
+                     foo@bar_baz.com 78foo@barbaz.com]
+      usernames.each do |invalid_username|
+        @user.username = invalid_username
+        expect(@user).not_to be_valid
+      end
+    end
+  end
+
+  describe "when username format is valid" do
+    it "should be valid" do
+      usernames = %w[rahul123 rahul_singh25 arhul_Singh0 rahulsingh]
+      usernames.each do |valid_username|
+        @user.username = valid_username
+        expect(@user).to be_valid
+      end
+    end
+  end
+  describe "when username is already taken" do
+    before do
+      user_with_same_username = @user.dup
+      user_with_same_username.username = @user.username.upcase
+      user_with_same_username.save
+    end
+
+    it { should_not be_valid }
+  end
 end
 

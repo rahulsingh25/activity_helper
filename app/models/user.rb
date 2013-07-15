@@ -29,8 +29,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  attr_accessible :email, :password, :name
-  validates :name, presence: true, length: {maximum:30}
-
+  attr_accessible :email, :password, :name, :username
+  validates :name, length: {maximum:30}
   has_many :activities, dependent: :destroy
+
+  VALID_USERNAME_REGEX = /\A[a-zA-Z]+((\_?[a-zA-Z0-9]+|[a-zA-Z0-9]*))*\z/i
+  validates :username, presence: true, format: { with: VALID_USERNAME_REGEX }, uniqueness: { case_sensitive: false }
+  before_save { self.username = username.downcase }
+
+
+  def to_param
+    username
+  end
 end
