@@ -52,8 +52,26 @@ describe "UserPages" do
         it { should have_selector('div.alert.alert-notice', text: 'Welcome') }
         it { should have_link('Logout') }
       end
-
     end
   end
 
+  describe "Profile page" do
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:a1) { FactoryGirl.create(:activity, user: user, category: "sports", name:"tennis", description:"very popular game") }
+    let!(:a2) { FactoryGirl.create(:activity, user: user, category: "movie", name:"pacific rim", description:"released on friday") }
+
+    before { visit user_path(user) }
+
+    it { should have_title(user.name) }
+
+  describe "Activities" do
+      it { should have_content(a1.category) }
+      it { should have_content(a1.name) }
+      it { should have_content(a1.description) }
+      it { should have_content(a2.category) }
+      it { should have_content(a2.name) }
+      it { should have_content(a2.description) }
+      it { should have_content(user.activities.count) }
+    end
+  end
 end

@@ -129,7 +129,7 @@ input, textarea, select, .uneditable-input {
   width: 100%;
   padding: 5px;
   margin-bottom: 10px;
- // @include box_sizing;
+  @include box_sizing;
 }
 
 input {
@@ -149,10 +149,6 @@ input {
 .field_with_errors {
   @extend .control-group;
   @extend .error;
-}
-
-.new_user{
-   
 }
 
 
@@ -231,6 +227,7 @@ aside {
 .custom-textarea{
   clear:both;
   width:99%;
+  placeholder:dgsd;
   padding-left:10px;
   padding-right:10px;
   float:left;
@@ -320,9 +317,9 @@ aside {
 
   }
 }
-[class*="span"] {
-  float: left;
-  min-height: 1px;
-  margin-left: 0px; }
+// [class*="span"] {
+//   float: left;
+//   min-height: 1px;
+//   margin-left: 0px; }
 
  

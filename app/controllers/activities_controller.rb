@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-	before_filter :authenticate_user!
+	before_filter :authenticate_user!, only: [:new,:create,:destroy]
 	
 	def new
       @activity=Activity.new    
@@ -16,6 +16,11 @@ class ActivitiesController < ApplicationController
 	 end
 
   	def destroy
+      
   	end
+
+    def index
+      
+    end
 
 end

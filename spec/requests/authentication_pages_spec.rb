@@ -52,13 +52,13 @@ describe "Authentication" do
 
       describe "in activities controller" do
         describe "submitting to the create action" do
-          before { post activities_path }
-          specify { expect(response).to redirect_to(user_session_path) }
+          before { post user_activities_path(user) }
+          specify { expect(response).to redirect_to(new_user_session_path) }
         end
 
         describe "submitting to the destroy action" do
-          before { delete activity_path(FactoryGirl.create(:activity)) }
-          specify { expect(response).to redirect_to(user_session_path) }
+          before { delete user_activity_path(user,FactoryGirl.create(:activity)) }
+          specify { expect(response).to redirect_to(new_user_session_path) }
         end
       end
     end
