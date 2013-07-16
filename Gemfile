@@ -5,7 +5,6 @@ gem 'rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'devise', '3.0.0.rc'
