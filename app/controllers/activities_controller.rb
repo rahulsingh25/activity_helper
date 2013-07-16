@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
 	before_filter :authenticate_user!, only: [:new,:create,:destroy]
-	
+  	
 	def new
       @activity=Activity.new    
   end

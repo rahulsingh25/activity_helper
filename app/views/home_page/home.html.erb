@@ -7,7 +7,8 @@
 <% else %>
 	<% provide(:title, 'ActivityHelper') %>
 	<div class="center hero-unit">
-		<h1>Welcome To The Activities Helper</h1>
+		<h1>Welcome To The Activities Feed</h1>
+		<span class="content"><%= link_to  "Sign in", new_user_session_path%> | <%= link_to "Sign up", new_user_registration_path%> and start sharing your activities to the world!</span>
 		<%= link_to "Sign Up Now!",new_user_registration_path, class: "btn btn-large btn-primary" %>
 	</div>
 <% end %>

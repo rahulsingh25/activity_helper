@@ -10,7 +10,7 @@ subject{ page }
 
 	 	 it { should have_title("ActivityHelper") }
 	 	 it { should have_link("Activities", href: "#") }
-	 	 it { should have_link("Register", href: new_user_registration_path) }
+	 	 it { should have_link("Sign up", href: new_user_registration_path) }
 	 	 it { should have_link("Sign In", href: user_session_path) }
 	 	 it { should have_selector("input") }
 	 	 
