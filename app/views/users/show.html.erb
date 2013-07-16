@@ -13,7 +13,7 @@
       <h3>Activities (<%= @user.activities.count %>)</h3>
       <%= will_paginate @activities %>
       <ol class="activities">
-        <%= render @activities %>
+        <%= render partial:'activities/activity', locals: { activities: @activities } %>
       </ol>
       <%= will_paginate @activities %>
     <% end %>

@@ -1,8 +1,11 @@
 <% if current_user %>
 	<% provide(:title, current_user.name) %>
 	
-	<%= render partial: 'activities/new' %>
-	<%= render 'home_page/all_users_activities' %>
+	<%= render partial: 'activities/new_partial', :locals => {:activity => @activity} %>
+	<div id="activities">
+		<%= render 'home_page/all_users_activities' %>	
+	</div>
+	
 	
 <% else %>
 	<% provide(:title, 'ActivityHelper') %>

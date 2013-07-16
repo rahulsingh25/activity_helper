@@ -1,38 +1,33 @@
-<!-- <li>
-  <span class="content"><%= activity.category %><%= activity.name %><%= activity.description %></span>
-  <span class="timestamp">
-    Posted <%= time_ago_in_words(activity.created_at) %> ago.
-  </span>
-</li> -->
 
-<div class="activity-feed">
-<li>
-<div class="row-fluid">
-  <div class="span2">
-  
-    <%= link_to gravatar_for(activity.user), activity.user %>
 
-  </div>
+<div id="activities-partial">
+<% activities.each do |activity| %>
+  <div class="activity-feed">
+    <li>
+      <div class="row-fluid">
+        <div class="span2">
+          <%= link_to gravatar_for(activity.user), activity.user %>
+        </div>
 
-  <div class="span3">
-    
-      <div class="name">
-        Activity:<%= activity.name %>
+        <div class="span3">
+          <div class="name">
+            Activity:<%= activity.name %>
+          </div>
+          <div class="content category">
+            Cagetory:<%= activity.category %>
+          </div>
+        </div>
+
+        <div class="span7 content timestamp">
+          <div class="content">
+            <%= activity.description %><br/>
+            <span class="timestamp">Posted <%= time_ago_in_words(activity.created_at) %> ago.</span>
+          </div>  
+        </div>
       </div>
-      <div class="content category">
-        Cagetory:<%= activity.category %>
-     </div>
-
+    </li>
   </div>
-
-  <div class="span7 content timestamp">
-    <div class="content">
-      <%= activity.description %><br/>
-      <span class="timestamp">Posted <%= time_ago_in_words(activity.created_at) %> ago.</span>
-      
-    </div>  
-  </div>
-  
-</li>
+  <% end %>
 </div>
+
 
