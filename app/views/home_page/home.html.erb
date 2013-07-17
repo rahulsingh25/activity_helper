@@ -2,8 +2,8 @@
 	<% provide(:title, current_user.name) %>
 	
 	<%= render partial: 'activities/new_partial', :locals => {:activity => @activity} %>
-	<div id="activities">
-		<%= render 'home_page/all_users_activities' %>	
+	<div id="activities">_
+		<%= render partial:'home_page/all_users_activities', :locals => {:activities => @activities} %>	
 	</div>
 	
 	

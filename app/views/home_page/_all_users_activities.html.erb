@@ -1,9 +1,9 @@
 
-    <% if @activities.any? %>
-      <%= will_paginate @activities %>
+    <% if activities.any? %>
+      <%= will_paginate activities %>
       <ol class="activities">
-        <%= render partial:'activities/activity', locals: { activities: @activities } %>
+        <%= render partial:'activities/activity', locals: { activities: activities } %>
       </ol>
-      <%= will_paginate @activities %>
+      <%= will_paginate activities %>
     <% end %>
   
