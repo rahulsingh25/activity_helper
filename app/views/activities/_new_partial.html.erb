@@ -1,8 +1,8 @@
 <div class="hero-unit">
   <div id="new-activity-form">
-    <%= render partial: 'shared/error_messages', locals: {activity: activity} %>
+    <%= render partial: 'shared/error_messages' %>
     <div class="new-activity-form">
-    <%= form_for([current_user,activity], remote:true, html:{ id: "create-activity-form" }) do |f| %>
+    <%= form_for([current_user,@activity], remote:true, html:{ id: "create-activity-form" }) do |f| %>
       <div class="custom-select">
         <%= f.label :category %>
         <%= f.select :category,[['Please select an option', nil], 'Sports', 'Movie','Music','TV Show','Tour','Lunch','Dinner'] %>

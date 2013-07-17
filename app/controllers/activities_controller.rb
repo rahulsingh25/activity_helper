@@ -11,7 +11,7 @@ class ActivitiesController < ApplicationController
         respond_with do |format|
           format.html do
             if request.xhr?
-              render partial: 'activity', layout:false, status: :created, locals: { activities: @activities }
+              render partial: 'activity', layout:false, status: :created, :locals => {:activity=>@activities.first}
             end
           end
         end
@@ -19,7 +19,7 @@ class ActivitiesController < ApplicationController
         respond_with do |format|
           format.html do
             if request.xhr?
-              render partial: 'new_partial', layout:false, status: :error, locals: { activity: @activity }
+              render partial: 'new_partial', layout:false, status: :error
 
             end
           end
