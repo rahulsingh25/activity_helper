@@ -19,17 +19,15 @@ gem 'bootstrap-will_paginate'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-   gem 'therubyracer'
-
   gem 'uglifier'
 end
 
 
 group :development do
 	gem 'sqlite3'
-	gem 'rspec-rails'
+	gem 'rspec-rails'	
+  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
+   	gem 'therubyracer'
 end
 
 group :test do
