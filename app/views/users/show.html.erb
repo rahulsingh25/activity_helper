@@ -1,10 +1,10 @@
-<% provide(:title, @user.name) %>
+<% provide(:title, @user.username) %>
 <div class="row">
   <aside class="span4">
     <section>
       <h1>
         <%= gravatar_for @user %>
-        <%= @user.name %>
+        <%= (@user.username) %>
       </h1>
     </section>
   </aside>
@@ -13,7 +13,9 @@
       <h3>Activities (<%= @user.activities.count %>)</h3>
       <%= will_paginate @activities %>
       <ol class="activities">
-        <%= render partial:'activities/activity', locals: { activities: @activities } %>
+        <% @activities.each do |activity| %>
+          <%= render partial:'activities/activity', locals: { activity: activity } %>
+        <% end %>
       </ol>
       <%= will_paginate @activities %>
     <% end %>

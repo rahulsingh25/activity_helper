@@ -16,8 +16,8 @@ describe "UserPages" do
   	describe "profile page" do
     	before { visit user_path(user) }
 
-    	it { should have_selector('h1',text: user.name) }
-    	it { should have_title(user.name) }
+    	it { should have_selector('h1',text: user.username) }
+    	it { should have_title(user.username) }
   	end
 
   	describe "signup" do
@@ -49,7 +49,7 @@ describe "UserPages" do
         before { click_button submit }
         let(:user) { User.find_by_email('user@example.com') }
 
-        it { should have_title(user.name) }
+        it { should have_title(user.username) }
         it { should have_selector('div.alert.alert-notice', text: 'Welcome') }
         it { should have_link('Logout') }
       end
@@ -63,7 +63,7 @@ describe "UserPages" do
 
     before { visit user_path(user) }
 
-    it { should have_title(user.name) }
+    it { should have_title(user.username) }
 
   describe "Activities" do
       it { should have_content(a1.category) }

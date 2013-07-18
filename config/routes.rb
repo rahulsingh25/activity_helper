@@ -4,9 +4,9 @@ ActivityHelper::Application.routes.draw do
   devise_for :users, controllers: {registrations: "users/registrations"}
 
   resources :users do
-
-     resources :activities, only: [:new, :create, :destroy, :index]  
-
+    resources :activities, only: [:new, :create, :destroy, :index]  do
+      resources :comments, only: [:create]
+    end
   end
     # get "home_page/home"
 
