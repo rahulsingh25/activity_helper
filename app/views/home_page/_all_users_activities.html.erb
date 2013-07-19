@@ -2,7 +2,7 @@
 	<% if activities.any? %>
       <%= will_paginate activities %>
         <% activities.each do |activity| %>
-        	<%= render partial:'activities/activity', locals: { activity: activity } %>
+        	<%= render partial:'activities/activity', locals: { activity: activity, comment:@comment } %>
         <% end %>
       <%= will_paginate activities %>
     <% end %>

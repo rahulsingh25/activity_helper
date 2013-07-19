@@ -10,4 +10,8 @@ $(document).ready(function(){
 	$(document).on("ajax:error","#create-activity-form",function(evt, rahul, status, error){
 		$(document).find('#new-activity-form').replaceWith(rahul.responseText);
 	});
+
+	$(document).on("click", ".comment-link", function(){
+		$(this).closest('.activity-feed').find('.comment-form').toggle(".comment-form");
+	});
 });

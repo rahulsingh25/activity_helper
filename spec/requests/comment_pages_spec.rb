@@ -7,14 +7,28 @@ describe "CommentPages" do
 	let(:user) { FactoryGirl.create(:user) }
 	before { sign_in user }
 
-	# describe "after activity creation" do
-	# 	let!(:a1) { FactoryGirl.create(:activity, user: user, category: "sports", name:"tennis", description:"very popular game") }
- #    let!(:a2) { FactoryGirl.create(:activity, user: user, category: "movie", name:"pacific rim", description:"released on friday") }
+	describe "activity creation", js:true do
 
- #    before { visit root_path }
+		let!(:a1) { FactoryGirl.create(:activity, user: user) }
+    	
+    	before do
+    		visit root_path
+    		a1.save
+       	end
 
- #    description "should have link to comment" do
- #    	it { should have_link("Comment") }
- #    end
- #  end
+    	describe "should have link to comment" do
+    		it { should have_link("Comment") }
+    	end
+
+    	describe "with valid information" do
+      		let!(:c1) { FactoryGirl.create(:comment, user: user, activity: a1) }
+
+      		before do
+        		c1.save
+        		visit root_path
+      		end
+
+      		it { should have_content("hello") } 
+    	end
+  	end
 end

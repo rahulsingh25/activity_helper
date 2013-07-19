@@ -5,7 +5,7 @@ ActivityHelper::Application.routes.draw do
 
   resources :users do
     resources :activities, only: [:new, :create, :destroy, :index]  do
-      resources :comments, only: [:create]
+      resources :comments, only: [:create, :show]
     end
   end
     # get "home_page/home"

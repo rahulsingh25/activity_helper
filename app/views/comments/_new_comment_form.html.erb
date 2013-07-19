@@ -1,0 +1,6 @@
+<div class="comment-form">
+  <%= form_for :comment, url:user_activity_comments_path(activity.user,activity), remote:true, html:{ class: "create-comment-form" } do |f| %>
+  		<%= render partial:'shared/comment_error', locals: { comment: comment } %>
+		<%= f.text_field :content %>
+  	<% end %>
+</div>

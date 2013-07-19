@@ -8,4 +8,6 @@ class Comment < ActiveRecord::Base
 	validates :activity_id, presence: true
 	validates :content, presence: true
 
+	default_scope -> { order('created_at DESC') }
+
 end
