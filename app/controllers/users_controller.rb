@@ -6,5 +6,14 @@ class UsersController < ApplicationController
 		@activities = @user.activities.paginate(page: params[:page])
 		@comment=@user.comments.build if user_signed_in?
 	end
+
+	def index
+		if user_signed_in?
+			@user=User.all
+		else
+			redirect_to root_url
+		end
+		
+	end
 end
 

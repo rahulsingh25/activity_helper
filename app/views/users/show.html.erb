@@ -6,6 +6,8 @@
         <%= gravatar_for @user %>
         <%= (@user.username) %>
       </h1>
+      <div><%= link_to "Find Friend", users_path if user_signed_in? %></div>
+      <div><%= link_to "See Friends", "#" %></div>
     </section>
   </aside>
   <div class="span8">

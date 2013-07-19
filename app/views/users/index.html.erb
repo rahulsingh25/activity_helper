@@ -1,0 +1,12 @@
+<div class="hero-unit">
+<div class="row-fluid">
+<div class="span7 offset2">
+	<%@user.each do |user|%>
+	<div class="content user-index">
+		<%= user.username %> 
+		<div class="add-friend-link"><%= link_to "Add Friend", "#" %></div>
+	</div>
+	<% end %>
+</div>
+</div>
+</div>
