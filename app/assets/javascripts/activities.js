@@ -1,11 +1,9 @@
 $(document).ready(function(){
 	$(document).on("ajax:success","#create-activity-form",function(evt,data,status,xhr){
-<<<<<<< HEAD
 		$('#activities').find('.activities').prepend(xhr.responseText);
-=======
 		//alert(xhr.responseText);
 		$(document).find('.activities').prepend(xhr.responseText);
->>>>>>> modeling-comments
+
 		var el = $('#create-activity-form');
 		el.find('input:text,textarea').val('');
 		el.find('.custom-select option').prop('selected',false);
