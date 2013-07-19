@@ -13,4 +13,10 @@ FactoryGirl.define do
     description "I like Football"
     user
   end
+
+  factory :comment do
+    content "hello"
+    user
+    activity
+  end
 end

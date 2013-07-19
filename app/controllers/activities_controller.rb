@@ -7,11 +7,16 @@ class ActivitiesController < ApplicationController
   def create
   	  @activity = current_user.activities.new(params[:activity])
       if @activity.save
-        @activities=Activity.paginate(page: params[:page])
+        @comment=@activity.comments.build
+        @comment.user=current_user
+        @activities=Activity.all
         respond_with do |format|
           format.html do
             if request.xhr?
-              render partial: 'activity', layout:false, status: :created, locals: { activities: @activities }
+              render partial: 'activity', layout:false, status: :created, locals: { activity: @activities.first, comment:@comment }
+            else
+              flash[:success]="Activity Created"
+              redirect_to root_url
             end
           end
         end
@@ -19,8 +24,10 @@ class ActivitiesController < ApplicationController
         respond_with do |format|
           format.html do
             if request.xhr?
-              render partial: 'new_partial', layout:false, status: :error, locals: { activity: @activity }
-
+              render partial: 'new_partial', layout:false, status: :error, locals: { activity: @activity, comment:@comment }
+            else
+              flash[:error]="error"
+              redirect_to root_url
             end
           end
         end

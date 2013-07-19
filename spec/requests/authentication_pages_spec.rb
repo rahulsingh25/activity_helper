@@ -32,7 +32,7 @@ describe "Authentication" do
         sign_in(user)                # utilities.rb function
       end
 
-      it { should have_title(user.name) }
+      it { should have_title(user.username) }
       it { should have_link('Activities',    href: "#") }
       it { should have_link('Logout', href: destroy_user_session_path) }
       it { should have_link('Profile', href: user_path(user)) }

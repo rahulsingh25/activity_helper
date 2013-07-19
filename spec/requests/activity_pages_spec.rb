@@ -7,7 +7,7 @@ describe "ACTIVITY pages" do
   let(:user) { FactoryGirl.create(:user) }
   before { sign_in user }
 
-  describe "activity creation" do
+  describe "activity creation", :js=>true do
     before { visit root_path }
 
     describe "with invalid information" do
@@ -18,20 +18,18 @@ describe "ACTIVITY pages" do
 
       describe "error messages" do
         before { click_button "Post" }
-        it { should have_content('error') }
+        it { should have_content('errors') }
       end
     end
 
     describe "with valid information" do
-
       before do
-       select 'Sports', 		    from: "Category"
-       fill_in 'Name', 			    with: "Footbal"
-       fill_in 'Description', 	with: "I like football" 
-   	  end
-      it "should create a activity post" do
-        expect { click_button "Post" }.to change(Activity, :count).by(1)
+        select 'Sports',         from: "Category"
+        fill_in 'Name',          with: "Footbal"
+        fill_in 'Description',   with: "I like football" 
+        click_button "Post" 
       end
+      it { should have_content("I like football")} 
     end
   end
 
@@ -42,7 +40,7 @@ describe "ACTIVITY pages" do
 
     before { visit root_path }
 
-    it { should have_title(user.name) }
+    it { should have_title(user.username) }
 
     describe "Activities" do
       it { should have_content(a1.category) }
