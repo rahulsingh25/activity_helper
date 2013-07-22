@@ -1,11 +1,14 @@
 <div class="hero-unit">
 <div class="row-fluid">
 <div class="span7 offset2">
-	<%@user.each do |user|%>
-	<div class="content user-index">
+	<% @users.each do |user|%>
+	<% if !current_user.friendships.where(friend: user).first && user != current_user %>
+		<div class="content user-index">
+		<%= gravatar_for(user,size:32) %>
 		<%= user.username %> 
-		<div class="add-friend-link"><%= link_to "Add Friend", "#" %></div>
+		<div class="add-friend-link"><%= link_to "Add Friend", user_friendships_path(current_user,friend_id:user.id), method: :post %></div>
 	</div>
+	<%end%>
 	<% end %>
 </div>
 </div>

@@ -7,8 +7,40 @@
         <%= (@user.username) %>
       </h1>
       <div><%= link_to "Find Friend", users_path if user_signed_in? %></div>
-      <div><%= link_to "See Friends", "#" %></div>
+      
     </section>
+    <div class="friend-link"><%= link_to "See Friends", "#" %></div>
+    
+    <div id="friend-list">
+      <ul>
+        <% @user.friendships.each do |friendship| %>
+          <li>
+            <%= gravatar_for(friendship.friend,size:22) %>
+            <%=h link_to friendship.friend.username, friendship.friend %>
+            <%  if user_signed_in? && correct_user %>
+              <div class="friendship-remove-link">
+                <%= link_to "Remove", user_friendship_path(current_user,friendship), method: :delete  %>
+              </div>
+            <% end %>
+          </li><br/>
+        <% end %>
+      </ul>
+    </div>
+    <div class="friended-by-link"><%= link_to "Friended By", "#" %></div>
+    <div id="friended-by-list">
+      <ul>
+        <% @user.inverse_friends.each do |inverse_friend| %>
+          <li>
+            <%= gravatar_for(inverse_friend,size:22) %><%=h link_to inverse_friend.username, inverse_friend %>
+                <%  if user_signed_in? && correct_user %>
+                  <div class="friendship-remove-link">
+                    <%= link_to "Remove", user_friendship_path(current_user,inverse_friend), method: :delete %>
+                  </div>
+                <% end %>
+          </li><br/>
+        <% end %>
+      </ul>
+    </div>
   </aside>
   <div class="span8">
     <% if @user.activities.any? %>

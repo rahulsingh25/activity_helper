@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
 	def index
 		if user_signed_in?
-			@user=User.all
+			@users=User.all
 		else
 			redirect_to root_url
 		end
