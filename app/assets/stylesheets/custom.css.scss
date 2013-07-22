@@ -275,7 +275,7 @@ aside {
 
 .hero-unit {
     
-    background: url("bg.jpg") repeat scroll center top rgb(36, 48, 47);
+    background: asset_url("bg.jpg") repeat scroll center top rgb(36, 48, 47);
     font-size:16px;
     font-weight:100;
     color:white;
@@ -294,7 +294,7 @@ aside {
   
   border-radius: 10px;
   margin-bottom:8px;
-  background: url("bg.jpg") scroll center top rgb(36, 48, 47);
+  background: asset_url("bg.jpg") scroll center top rgb(36, 48, 47);
   border: 1px solid white;
   box-shadow: 7px 7px 6px #888;
   color:white;

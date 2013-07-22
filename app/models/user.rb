@@ -20,6 +20,7 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  username               :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -33,6 +34,11 @@ class User < ActiveRecord::Base
   validates :name, length: {maximum:30}
   has_many :activities , dependent: :destroy
   has_many :comments, through: :activities, dependent: :destroy
+
+  has_many :friendships
+  has_many :friends, through: :friendships
+  has_many :inverse_friendships, class_name:'Friendship', foreign_key:'friend_id'
+  has_many :inverse_friends, through: :inverse_friendships, source: :user
 
   VALID_USERNAME_REGEX = /\A[a-zA-Z]+((\_?[a-zA-Z0-9]+|[a-zA-Z0-9]*))*\z/i
   validates :username, presence: true, format: { with: VALID_USERNAME_REGEX }, uniqueness: { case_sensitive: false }

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id          :integer          not null, primary key
+#  content     :string(255)
+#  activity_id :integer
+#  user_id     :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 require 'spec_helper'
 
 	describe Comment do
@@ -22,17 +34,17 @@ require 'spec_helper'
 		it { should be_valid }
 
 		describe "when content is not present" do
-    	before { @comment.content = nil }
-    	it { should_not be_valid }
-  	end
+    		before { @comment.content = nil }
+    		it { should_not be_valid }
+  		end
 
-  	describe "when user_id is not present" do
-    	before { @comment.user_id = nil }
-    	it { should_not be_valid }
-  	end
+  		describe "when user_id is not present" do
+    		before { @comment.user_id = nil }
+    		it { should_not be_valid }
+  		end
 
-  	describe "when activity_id is not present" do
-    	before { @comment.activity_id = nil }
-    	it { should_not be_valid }
-  	end
+  		describe "when activity_id is not present" do
+    		before { @comment.activity_id = nil }
+    		it { should_not be_valid }
+  		end
 	end

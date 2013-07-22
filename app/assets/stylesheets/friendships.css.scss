@@ -1,0 +1,37 @@
+// Place all the styles related to the Friendships controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.content.user-index{
+
+     border-bottom:1px solid white;
+ 	 padding:6px 0px 0px 0px;
+  
+}
+
+.add-friend-link{
+  float:right;
+}
+
+.friendship-remove-link{
+	width: 50px;
+	float:right;
+	padding-right:20px;
+	// li{
+	// 	padding:10px 10px 10px 10px;
+	// }
+}
+
+#friend-list{
+  color:green;
+  li{
+    //margin-left:0px;
+    list-style:none;
+  }
+}
+
+#friended-by-list{
+	color:green;
+	li{
+		list-style:none;
+	}
+}

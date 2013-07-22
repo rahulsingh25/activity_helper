@@ -20,6 +20,7 @@
 #  confirmation_token     :string(255)
 #  confirmed_at           :datetime
 #  confirmation_sent_at   :datetime
+#  username               :string(255)
 #
 
 require 'spec_helper'
