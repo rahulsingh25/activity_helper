@@ -11,7 +11,7 @@
 
 class Friendship < ActiveRecord::Base
 
-	attr_accessible :friend_id
+	attr_accessible :friend_id,:status
 	belongs_to :user
 	belongs_to :friend, class_name:'User'
 

@@ -40,7 +40,7 @@ describe User do
   it { should respond_to(:confirmation_token) }
   it { should respond_to(:activities) }
   it { should respond_to(:username) }
-  
+ 
   it { should be_valid }
 
   describe "when name is not present" do

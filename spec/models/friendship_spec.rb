@@ -9,7 +9,10 @@ describe Friendship do
 
 	it { should respond_to(:user_id) }
 	it { should respond_to(:friend_id) }
-
+	it { should respond_to(:status) }
+	it { should respond_to(:user) }
+	it { should respond_to(:friend) }
+	
 	it { should be_valid }
 
 

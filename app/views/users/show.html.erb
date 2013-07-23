@@ -7,13 +7,13 @@
         <%= (@user.username) %>
       </h1>
       <div><%= link_to "Find Friend", users_path if user_signed_in? %></div>
-      
     </section>
+
     <div class="friend-link"><%= link_to "See Friends", "#" %></div>
-    
     <div id="friend-list">
       <ul>
         <% @user.friendships.each do |friendship| %>
+          <% if friendship.status==true %>
           <li>
             <%= gravatar_for(friendship.friend,size:22) %>
             <%=h link_to friendship.friend.username, friendship.friend %>
@@ -23,24 +23,42 @@
               </div>
             <% end %>
           </li><br/>
+          <% end %>
+        <% end %>
+        <% @user.inverse_friendships.each do |inverse_friendship| %>
+          <% if inverse_friendship.status==true %>
+          <li>
+            <%= gravatar_for(inverse_friendship.user,size:22) %>
+            <%=h link_to inverse_friendship.user.username, inverse_friendship.user %>
+            <%  if user_signed_in? && correct_user %>
+              <div class="friendship-remove-link">
+                <%= link_to "Remove", user_inverse_friendship_path(current_user,inverse_friendship), method: :delete  %>
+              </div>
+            <% end %>
+          </li><br/>
+          <% end %>
         <% end %>
       </ul>
     </div>
-    <div class="friended-by-link"><%= link_to "Friended By", "#" %></div>
+
+    <%  if user_signed_in? && correct_user %>
+    <div class="friended-by-link"><%= link_to "See Pending Request", "#" %></div>
     <div id="friended-by-list">
       <ul>
-        <% @user.inverse_friends.each do |inverse_friend| %>
+        <% @user.inverse_friendships.each do |inverse_friendship| %>
+        <% if inverse_friendship.status==false %>
           <li>
-            <%= gravatar_for(inverse_friend,size:22) %><%=h link_to inverse_friend.username, inverse_friend %>
-                <%  if user_signed_in? && correct_user %>
+            <%= gravatar_for(inverse_friendship.user,size:22) %><%=h link_to inverse_friendship.user.username, inverse_friendship.user %>
                   <div class="friendship-remove-link">
-                    <%= link_to "Remove", user_friendship_path(current_user,inverse_friend), method: :delete %>
+                    <%= link_to "Accept", user_friendship_path(current_user,inverse_friendship), method: :put %>
+                    <%= link_to "Decline", user_inverse_friendship_path(current_user, inverse_friendship), method: :delete %>
                   </div>
-                <% end %>
           </li><br/>
+        <% end %>
         <% end %>
       </ul>
     </div>
+    <% end %>
   </aside>
   <div class="span8">
     <% if @user.activities.any? %>

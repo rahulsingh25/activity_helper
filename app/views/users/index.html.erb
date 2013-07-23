@@ -1,15 +1,39 @@
 <div class="hero-unit">
-<div class="row-fluid">
-<div class="span7 offset2">
-	<% @users.each do |user|%>
-	<% if !current_user.friendships.where(friend: user).first && user != current_user %>
-		<div class="content user-index">
-		<%= gravatar_for(user,size:32) %>
-		<%= user.username %> 
-		<div class="add-friend-link"><%= link_to "Add Friend", user_friendships_path(current_user,friend_id:user.id), method: :post %></div>
+	<div class="row-fluid">
+		<div class="span7 offset2">
+
+			<% @users.each do |user|%>
+
+				<% if user != current_user %>
+					<% if current_user.friendships.where(friend: user).first %>
+						<div class="content user-index">
+							<%= gravatar_for(user,size:32) %>
+							<%= user.username %> 
+							<div class="add-friend-link">
+								<%= label_tag("Friend Request Sent")%>
+							</div>
+						</div>
+					<% elsif current_user.inverse_friendships.where(user: user).first %> 
+						
+						<div class="content user-index">
+							<%= gravatar_for(user,size:32) %>
+							<%= user.username %> 
+							<div class="add-friend-link">
+								<%= label_tag("Awating Your Response!") %>
+							</div>
+						</div>
+					<% else %>
+						<div class="content user-index">
+							<%= gravatar_for(user,size:32) %>
+							<%= user.username %> 
+							<div class="add-friend-link">
+								<%= link_to "Add Friend", user_friendships_path(current_user,friend_id:user.id), method: :post %>
+							</div>
+						</div>
+					<% end %>
+				<% end %>
+
+			<% end %>
+		</div>
 	</div>
-	<%end%>
-	<% end %>
-</div>
-</div>
 </div>
