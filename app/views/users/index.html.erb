@@ -5,34 +5,68 @@
 			<% @users.each do |user|%>
 
 				<% if user != current_user %>
-					<% if current_user.friendships.where(friend: user).first %>
-						<div class="content user-index">
-							<%= gravatar_for(user,size:32) %>
-							<%= user.username %> 
-							<div class="add-friend-link">
-								<%= label_tag("Friend Request Sent")%>
+
+					<% if found_user = current_user.friendships.find_by_friend_id(user.id) %>
+						<% if found_user.status==false %>
+							<div class="content user-index">
+								<%= gravatar_for(user,size:32) %>
+								<%=link_to user.username, user_path(user) %> 
+								<div class="btn-action btn btn-inverse">
+									<%= link_to label_tag("Cancel"), user_friendship_path(current_user,found_user), method: :delete %>
+								</div>
+								<div class="friendship-status label label-warning">
+									<%= label_tag("Friend Request Sent!")%>
+								</div>
 							</div>
-						</div>
-					<% elsif current_user.inverse_friendships.where(user: user).first %> 
-						
-						<div class="content user-index">
-							<%= gravatar_for(user,size:32) %>
-							<%= user.username %> 
-							<div class="add-friend-link">
-								<%= label_tag("Awating Your Response!") %>
+						<%else%>
+							<div class="content user-index">
+								<%= gravatar_for(user,size:32) %>
+								<%=link_to user.username, user_path(user) %>
+								<div class="btn-action btn btn-inverse">
+									<%=link_to label_tag("Remove"), user_friendship_path(current_user,found_user), method: :delete %>
+								</div>
+								<div class="friendship-status label label-success">
+									<%= label_tag("Friend!")%>
+								</div>
+							</div>	
+						<% end %>
+					<% elsif found_user=current_user.inverse_friendships.find_by_user_id(user.id) %> 
+						<% if found_user.status==false %>
+							<div class="content user-index">
+								<%= gravatar_for(user,size:32) %>
+								<%=link_to user.username, user_path(user) %> 
+								<div class="btn-action btn btn-inverse">
+									<%=link_to label_tag("Decline"), user_inverse_friendship_path(current_user,found_user), method: :delete %>
+								</div>
+								<div class="btn-action btn btn-inverse">
+									<%=link_to label_tag("Accept"), user_friendship_path(current_user,found_user), method: :put %>
+								</div>
+								<div class="friendship-status label label-important">
+									<%= label_tag("Awating Your Response!") %>
+								</div>
 							</div>
-						</div>
+						<% else %>
+							<div class="content user-index">
+								<%= gravatar_for(user,size:32) %>
+								<%= link_to user.username, user_path(user) %> 
+								<div class="btn-action btn btn-inverse">
+									<%=link_to label_tag("Remove"), user_inverse_friendship_path(current_user,found_user), method: :delete %>
+								</div>
+								<div class="friendship-status label label-success">
+									<%= label_tag("Friend!") %>
+								</div>
+							</div>
+						<% end %>
 					<% else %>
 						<div class="content user-index">
 							<%= gravatar_for(user,size:32) %>
-							<%= user.username %> 
+							<%=link_to user.username, user_path(user) %> 
 							<div class="add-friend-link">
 								<%= link_to "Add Friend", user_friendships_path(current_user,friend_id:user.id), method: :post %>
 							</div>
 						</div>
 					<% end %>
 				<% end %>
-
 			<% end %>
 		</div>
 	</div>
