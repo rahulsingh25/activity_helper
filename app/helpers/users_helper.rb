@@ -1,6 +1,6 @@
 module UsersHelper
 	# Returns the Gravatar (http://gravatar.com/) for the given user.
-  def gravatar_for(user, options={size: 150} )
+  def gravatar_for(user, options={size: 120} )
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
     size=options[:size]
     # raise gravatar_id.to_yaml

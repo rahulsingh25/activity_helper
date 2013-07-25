@@ -40,6 +40,11 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, class_name:'Friendship', foreign_key:'friend_id'
   has_many :inverse_friends, through: :inverse_friendships, source: :user
 
+  has_many :messages
+  has_many :recipients, through: :messages
+  has_many :inverse_messages, class_name: 'Message', foreign_key:'recipient_id'
+  has_many :senders, through: :inverse_messages, source: :user
+
   VALID_USERNAME_REGEX = /\A[a-zA-Z]+((\_?[a-zA-Z0-9]+|[a-zA-Z0-9]*))*\z/i
   validates :username, presence: true, format: { with: VALID_USERNAME_REGEX }, uniqueness: { case_sensitive: false }
   before_save { self.username = username.downcase }

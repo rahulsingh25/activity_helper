@@ -17,4 +17,7 @@ class Friendship < ActiveRecord::Base
 
 	validates :user_id, presence: true
 	validates :friend_id, presence: true
+
+	# has_many :messages, dependent: :destroy
+	# has_many :inverse_messages, class_name:'Message', foreign_key:'friend_id'
 end

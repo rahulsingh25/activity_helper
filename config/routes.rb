@@ -7,8 +7,9 @@ ActivityHelper::Application.routes.draw do
     resources :activities, only: [:new, :create, :destroy, :index]  do
       resources :comments, only: [:create, :show]
     end
-    resources :friendships, only: [:create,:destroy,:update]
+    resources :friendships, only: [:create,:destroy,:update] 
     resources :inverse_friendships, only: [:destroy]
+    resources :messages, only: [:create, :destroy]
   end
 
     # get "home_page/home"

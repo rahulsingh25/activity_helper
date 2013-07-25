@@ -6,7 +6,7 @@
         <%= gravatar_for @user %>
         <%= (@user.username) %>
       </h1>
-      <div><%= link_to "Find Friend", users_path if user_signed_in? %></div>
+      <div><%= link_to "Find Friend", users_path if (user_signed_in? && correct_user) %></div>
     </section>
 
     <div class="friend-link"><%= link_to "See Friends", "#" %></div>
@@ -58,6 +58,45 @@
         <% end %>
       </ul>
     </div>
+    <% end %>
+
+    <% if user_signed_in? && correct_user %>
+      <div class="see-outbox"><%= link_to "See Outbox", "#" %></div>
+        <div class="outbox-message-list">
+          <% if current_user.messages.any? %>
+            <% current_user.messages.each do |msg| %>
+              <div class="message label label-important">
+                <%= msg.message %><br/>
+                  (sent by You to<%= link_to msg.recipient.username, msg.recipient %> 
+                at <%= msg.created_at %>.)
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      
+      <div class="see-inbox"><%= link_to "See Inbox", "#" %></div>
+        <div class="inbox-message-list">
+          <% if current_user.inverse_messages.any? %>
+            <% current_user.inverse_messages.each do |inv_msg| %>
+              <div class="message label label-important">
+                <%= inv_msg.message %><br/>
+                  (from <%= link_to inv_msg.user.username, inv_msg.user %> 
+                at <%= inv_msg.created_at %>.)
+              </div>
+            <% end %>
+          <% end %>
+      </div>
+      
+
+    <% elsif user_signed_in? && !correct_user && (current_user.friendships.find_by_friend_id(@user.id).present? || current_user.inverse_friendships.find_by_user_id(@user.id).present?) %>
+
+        <%= form_for :text, url:user_messages_path(current_user,recipient_id:@user.id) do |f| %>
+            <%= f.text_area :message, placeholder:"Send Message to #{params[:id]}" %><br/>
+            <%= f.button "Send", class:'btn btn-success' %>
+        <% end %>
+
+        
+
     <% end %>
   </aside>
   <div class="span8">
