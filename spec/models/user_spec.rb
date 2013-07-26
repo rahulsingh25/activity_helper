@@ -40,6 +40,15 @@ describe User do
   it { should respond_to(:confirmation_token) }
   it { should respond_to(:activities) }
   it { should respond_to(:username) }
+  it { should respond_to(:messages) }
+  it { should respond_to(:inverse_messages) }
+  it { should respond_to(:recipients) }
+  it { should respond_to(:comments) }
+  it { should respond_to(:friendships) }
+  it { should respond_to(:inverse_friendships) }
+  it { should respond_to(:friends) }
+  it { should respond_to(:inverse_friends) }
+
  
   it { should be_valid }
 
@@ -141,6 +150,39 @@ describe User do
       expect(activities).not_to be_empty
       activities.each do |activity|
         expect(Activity.where(id: activity.id)).to be_empty
+      end
+    end
+  end
+
+  describe "Comment associations" do
+
+    before do
+      @user.save
+      @activity=@user.activities.build(category: 'Tour', name: 'Agra', description: "Agra have TajMahal")
+      @activity.save
+    end
+    let!(:older_comment) do 
+       FactoryGirl.create(:comment, content:"good place", user:@user, activity:@activity, created_at: 1.day.ago)
+    end
+    let!(:newer_comment) do
+      FactoryGirl.create(:comment, content:"nice place", user:@user, activity:@activity, created_at: 1.hour.ago)
+    end
+
+    it "should have the right comments in the right order" do
+      @activity.comments.should == [newer_comment, older_comment]
+    end
+
+    it "should destroy associated comments" do
+      activities = @user.activities.to_a
+      comments=@activity.comments.to_a
+      @user.destroy
+      expect(activities).not_to be_empty
+      expect(comments).not_to be_empty
+      activities.each do |activity|
+        expect(Activity.where(id: activity.id)).to be_empty
+      end
+      comments.each do |comment|
+        expect(Comment.where(id: comment.id)).to be_empty
       end
     end
   end

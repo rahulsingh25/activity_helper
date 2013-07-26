@@ -15,6 +15,7 @@ require 'spec_helper'
 	describe Comment do
 
 		let(:user) { FactoryGirl.create(:user) }
+		let(:user1)	{ FactoryGirl.create(:user) }
 		let(:activity) { FactoryGirl.create(:activity, user: user) }
 
 		before do
@@ -47,4 +48,16 @@ require 'spec_helper'
     		before { @comment.activity_id = nil }
     		it { should_not be_valid }
   		end
+
+  		describe "comment on other users activity" do
+  			before do
+  			
+  				FactoryGirl.create(:activity, user: user)
+  				@comment=activity.comments.build(content:"good")
+				@comment.user = user1
+			end
+			it { should be_valid }
+  		end
+
+
 	end

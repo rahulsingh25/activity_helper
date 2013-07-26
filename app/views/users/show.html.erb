@@ -65,10 +65,10 @@
         <div class="outbox-message-list">
           <% if current_user.messages.any? %>
             <% current_user.messages.each do |msg| %>
-              <div class="message label label-important">
+              <div class="message label label-inverse">
                 <%= msg.message %><br/>
-                  (sent by You to<%= link_to msg.recipient.username, msg.recipient %> 
-                at <%= msg.created_at %>.)
+                  <small class="abc">(To: <%= link_to msg.recipient.username, msg.recipient %> 
+                at <%= msg.created_at %>.)</small>
               </div>
             <% end %>
           <% end %>
@@ -78,10 +78,10 @@
         <div class="inbox-message-list">
           <% if current_user.inverse_messages.any? %>
             <% current_user.inverse_messages.each do |inv_msg| %>
-              <div class="message label label-important">
+              <div class="message label label-inverse">
                 <%= inv_msg.message %><br/>
-                  (from <%= link_to inv_msg.user.username, inv_msg.user %> 
-                at <%= inv_msg.created_at %>.)
+                  <small class="abc">(From: <%= link_to inv_msg.user.username, inv_msg.user %> 
+                at <%= inv_msg.created_at %>.)</small>
               </div>
             <% end %>
           <% end %>

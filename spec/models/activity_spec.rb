@@ -27,6 +27,7 @@ describe Activity do
   it { should respond_to(:name) }
   it { should respond_to(:description) }
   it { should respond_to(:user) }
+  it { should respond_to(:comments) }
   its(:user) { should == user }
 
   it { should be_valid }
@@ -54,6 +55,33 @@ describe Activity do
   describe "with content that is too long" do
     before { @activity.description = "a" * 201 }
     it { should_not be_valid }
+  end
+
+  describe "Comment associations" do
+
+    before do
+      user.save
+      @activity.save
+    end
+    let!(:older_comment) do 
+       FactoryGirl.create(:comment, content:"good game", user:user, activity:@activity, created_at: 1.day.ago)
+    end
+    let!(:newer_comment) do
+      FactoryGirl.create(:comment, content:"nice game", user:user, activity:@activity, created_at: 1.hour.ago)
+    end
+
+    it "should have the right comments in the right order" do
+      @activity.comments.should == [newer_comment, older_comment]
+    end
+
+    it "should destroy associated comments" do
+      comments=@activity.comments.to_a
+      @activity.destroy
+      expect(comments).not_to be_empty
+      comments.each do |comment|
+        expect(Comment.where(id: comment.id)).to be_empty
+      end
+    end
   end
 
 end

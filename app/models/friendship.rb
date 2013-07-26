@@ -7,6 +7,7 @@
 #  friend_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  status     :boolean          default(FALSE)
 #
 
 class Friendship < ActiveRecord::Base

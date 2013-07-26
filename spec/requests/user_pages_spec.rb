@@ -5,7 +5,8 @@ describe "UserPages" do
 	subject { page }
 
 	let(:user) { FactoryGirl.create(:user) }
-
+  let(:user2) { FactoryGirl.create(:user) }
+ 
 	describe "signup page" do
     	before { visit new_user_registration_path }
 
@@ -64,8 +65,9 @@ describe "UserPages" do
     before { visit user_path(user) }
 
     it { should have_title(user.username) }
-
-  describe "Activities" do
+    it { should have_link('See Friends') }
+    
+    describe "Activities" do
       it { should have_content(a1.category) }
       it { should have_content(a1.name) }
       it { should have_content(a1.description) }
@@ -74,5 +76,17 @@ describe "UserPages" do
       it { should have_content(a2.description) }
       it { should have_content(user.activities.count) }
     end
+  end
+
+  describe "visit profile after sign in" do
+    before do
+      sign_in user 
+      visit user_path(user)
+    end
+    it { should have_link('Find Friend') }
+    it { should have_link('See Pending Request') }
+    it { should have_link('See Inbox') }
+    it { should have_link('See Outbox') }
+    it { should have_link('See Friends') }
   end
 end

@@ -19,4 +19,11 @@ FactoryGirl.define do
     user
     activity
   end
+
+  factory :friendship do
+    user
+    friend_id 1
+    status "false"
+  end
+
 end
