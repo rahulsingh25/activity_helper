@@ -25,5 +25,4 @@ FactoryGirl.define do
     friend_id 1
     status "false"
   end
-
 end

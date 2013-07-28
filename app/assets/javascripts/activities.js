@@ -1,9 +1,7 @@
 $(document).ready(function(){
 	$(document).on("ajax:success","#create-activity-form",function(evt,data,status,xhr){
 		$('#all-activities').find('.activities').prepend(xhr.responseText);
-		//alert(xhr.responseText);
-		//$(document).find('.activities').prepend(xhr.responseText);
-
+		
 		var el = $('#create-activity-form');
 		el.find('input:text,textarea').val('');
 		el.find('.custom-select option').prop('selected',false);
